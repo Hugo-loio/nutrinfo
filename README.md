@@ -4,6 +4,12 @@ A simple Python CLI program that allows users to input and save custom nutrition
 
 Only the main macronutrients are supported, and the final table for the recipe produces values per 100 g.
 
-## Dependencies
+Install with 
 
-## Usage
+    ./install.sh
+
+Unistall with 
+
+    ./uninstall.sh
+
+The cli tool will be available as `nutrinfo`. Data will be locally saved in the current working directory from where the program launched.
