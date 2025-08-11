@@ -10,9 +10,6 @@ authors = [
 ]
 description = "A cli tool for creating recipe nutritional info tables"
 requires-python = ">=3.8"
-dependencies = [
-    "requests",
-]
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
@@ -24,7 +21,7 @@ dependencies = [
 ]
 
 [project.scripts]
-mytool = "nutrinfo.cli:main"
+nutrinfo = "nutrinfo.cli:main"
 
 [project.urls]
 "Homepage" = "https://github.com/Hugo-loio/nutrinfo"

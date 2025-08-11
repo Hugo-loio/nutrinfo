@@ -8,30 +8,44 @@ class REPL(cmd.Cmd):
 
     #def do_help(self):
 
-    def do_list(self):
+    def do_list(self, arg):
+        """List all locally saved recipes and ingredients""" 
         recipes = [f.stem for f in Path(utils.data_rec_dir).glob("*.json")]
-        print("\nSaved recipes:")
-        for recipe in recipes:
-            print("\t-" + recipe)
+        if(len(recipes) == 0):
+            print("\nNo recipes found!")
+        else:
+            print("\nSaved recipes:")
+            for recipe in recipes:
+                print("\t-" + recipe)
 
         ingredients = [f.stem for f in Path(utils.data_ing_dir).glob("*.json")]
-        print("\nSaved ingredients:")
-        for ingredient in ingredients:
-            print("\t-" + ingredient)
+        if(len(ingredients) == 0):
+            print("\nNo ingredients found!")
+        else:
+            print("\nSaved ingredients:")
+            for ingredient in ingredients:
+                print("\t-" + ingredient)
+        print()
 
-    def do_exit(self):
+    def do_exit(self, arg):
         """Exit the REPL"""
         print("Exiting...")
         return True
 
-    def do_quit(self):
+    def do_quit(self, arg):
         """Exit the REPL"""
+        return self.do_exit(arg)
+
+    def do_EOF(self, arg):
+        """Exit the REPL with Ctrl-D"""
         return self.do_exit(arg)
 
     def emptyline(self):
         pass  # Do nothing on empty input
 
-if __name__ == '__main__':
-    REPL().cmdloop("Welcome to nutrinfo! To list avaible commands type 'help'. Type 'exit' to quit.")
+def main():
+    REPL().cmdloop("Welcome to nutrinfo! Type 'help' for documentation.")
 
-les)
+if __name__ == '__main__':
+    main()
+

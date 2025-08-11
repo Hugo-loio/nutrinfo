@@ -1,3 +1,6 @@
+import sys
+import os
+
 from tabulate import tabulate
 
 def check_dir(path):
