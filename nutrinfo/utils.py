@@ -1,8 +1,15 @@
 from tabulate import tabulate
 
-data_dir = sys.path[0] + "/data/"
-if(not os.path.isdir(data_dir)):
-    os.mkdir(data_dir)
+def check_dir(path):
+    if(not os.path.isdir(path)):
+        os.mkdir(path)
+
+data_dir = sys.path[0] + "/nutrinfo/"
+check_dir(data_dir)
+data_ing_dir = data_dir + "/ingredients/"
+check_dir(data_ing_dir)
+data_rec_dir = data_dir + "/recipes/"
+check_dir(data_rec_dir)
 
 def print_table(nutrition):
     pretty_dict = {}

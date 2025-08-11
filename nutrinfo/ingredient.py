@@ -1,5 +1,5 @@
 import json
-import src.utils as utils
+import utils
 
 class Ingredient:
     def __init__(self, name : str):
@@ -9,6 +9,7 @@ class Ingredient:
             self.load()
         except FileNotFoundError:
             self.new_info()
+            self.save()
 
 
     def new_info(self):
@@ -34,11 +35,11 @@ class Ingredient:
                 raise RuntimeError("Non-valid table")
 
     def save(self):
-        with open(utils.data_dir + self.name + ".json", "w") as f:
+        with open(utils.data_ing_dir + self.name + ".json", "w") as f:
             json.dump(self.nutrition, f)
 
     def load(self):
-        with open(utils.data_dir + self.name + ".json", "r") as f:
+        with open(utils.data_ing_dir + self.name + ".json", "r") as f:
             self.nutrition = json.load(f)
         print("Found nutrition table for " + self.name)
         utils.print_table(self.nutrition)
