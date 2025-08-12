@@ -12,4 +12,4 @@ Unistall with
 
     ./uninstall.sh
 
-The cli tool will be available as `nutrinfo`. Data will be locally saved in the current working directory from where the program launched.
+The cli tool will be available as `nutrinfo`. Data will be locally saved in the current working directory. 
