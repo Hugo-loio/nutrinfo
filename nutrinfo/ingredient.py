@@ -1,30 +1,31 @@
 import json
+
 from . import utils
 
 class Ingredient:
-    def __init__(self, name : str):
+    def __init__(self, name : str, verbose = True):
         self.name = name
 
         try:
-            self.load()
+            self.load(verbose)
         except FileNotFoundError:
             self.new_info()
             self.save()
 
 
     def new_info(self):
-        print("\nPlease fill in the nutritional information per 100g of " + name)
+        print("\nPlease fill in the nutritional information per 100g of " + self.name.replace("_", " "))
         self.nutrition = {}
-        self.nutrition["energy"]  = float(input("Energy (kcal):"))
-        self.nutrition["fat"]     = float(input("Fat (g):"))
-        self.nutrition["sat_fat"] = float(input("Saturated fat (g)"))
-        self.nutrition["carbs"]   = float(input("Carbohydrates (g):"))
-        self.nutrition["sugar"]   = float(input("Sugar (g):"))
-        self.nutrition["fiber"]   = float(input("Fiber (g):"))
-        self.nutrition["protein"] = float(input("Protein (g):"))
-        self.nutrition["weight"]  = float(input("Typical weight (g):"))
+        self.nutrition["energy"]  = float(input("Energy (kcal): "))
+        self.nutrition["fat"]     = float(input("Fat (g): "))
+        self.nutrition["sat_fat"] = float(input("Saturated fat (g): "))
+        self.nutrition["carbs"]   = float(input("Carbohydrates (g): "))
+        self.nutrition["sugar"]   = float(input("Sugar (g): "))
+        self.nutrition["fiber"]   = float(input("Fiber (g): "))
+        self.nutrition["protein"] = float(input("Protein (g): "))
+        #self.nutrition["weight"]  = float(input("Typical weight (g): "))
 
-        print("\nFinal table:")
+        print("\nFinal table for ingredient " + self.name.replace("_", " "))
         utils.print_table(self.nutrition)
 
         while True:
@@ -34,12 +35,25 @@ class Ingredient:
             elif answer in ["no", "n"]:
                 raise RuntimeError("Non-valid table")
 
+    def replace(self):
+        old = dict(self.nutrition)
+        try:
+            self.new_info()
+            self.save()
+        except RuntimeError:
+            print("Ingredient not replaced")
+            self.nutrition = old
+
     def save(self):
         with open(utils.data_ing_dir + self.name + ".json", "w") as f:
             json.dump(self.nutrition, f)
 
-    def load(self):
+    def show(self):
+        print("\nNutrition table:")
+        utils.print_table(self.nutrition)
+
+    def load(self, verbose = True):
         with open(utils.data_ing_dir + self.name + ".json", "r") as f:
             self.nutrition = json.load(f)
-        print("Found nutrition table for " + self.name)
-        utils.print_table(self.nutrition)
+        if(verbose):
+            print("Importing saved ingredient...")

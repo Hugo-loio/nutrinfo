@@ -1,5 +1,6 @@
 import sys
 import os
+import re
 
 from tabulate import tabulate
 
@@ -18,15 +19,12 @@ def print_table(nutrition):
     pretty_dict = {}
     pretty_dict["Energy"] = str(nutrition["energy"]) + " (kcal)"
     pretty_dict["Fat"] = str(nutrition["fat"]) + " (g)"
-    pretty_dict[" -Saturated"] = str(nutrition["sat_fat"]) + " (g)"
+    pretty_dict["- Saturated"] = str(nutrition["sat_fat"]) + " (g)"
     pretty_dict["Carbohydrates"] = str(nutrition["carbs"]) + " (g)"
-    pretty_dict[" -Sugar"] = str(nutrition["sugar"]) + " (g)"
-    pretty_dict[" -Fiber"] = str(nutrition["fiber"]) + " (g)"
+    pretty_dict["- Sugar"] = str(nutrition["sugar"]) + " (g)"
+    pretty_dict["- Fiber"] = str(nutrition["fiber"]) + " (g)"
     pretty_dict["Protein"] = str(nutrition["protein"]) + " (g)"
-    print(tabulate(nutrition.items(), headers=[], tablefmt="grid"))
-
-import re
-import sys
+    print(tabulate(pretty_dict.items(), headers=[], tablefmt="grid"))
 
 def is_valid_filename(filename: str) -> bool:
     # Common invalid characters on Windows and Unix
