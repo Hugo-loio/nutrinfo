@@ -1,12 +1,34 @@
 import cmd
 from pathlib import Path
 
-import utils
+from . import utils
+from .recipe import Recipe
+from .ingredient import Ingredient
 
 class REPL(cmd.Cmd):
     prompt = ">>> "
 
-    #def do_help(self):
+    def __init__(self):
+        super().__init__()
+        self.recipe = None
+    
+    def help_recipe(self):
+        print("\n\trecipe [name]\n\nCreate a new recipe or load an existing one (in case a file with the same name already exists).\nSpaces and underscores are not distinguishable in the name.\n")
+
+    def do_recipe(self, arg):
+        if(utils.is_valid_filename(arg)):
+            name = arg.replace(" ", "_")
+            self.recipe = Recipe(name)
+
+    def do_add(self, arg):
+        """
+
+            \tadd [name]
+
+            Add an ingredient to the active recipe or to the local ingredient pool if no recipe is active.
+            Spaces and underscores are not distinguishable in the name.
+
+        """ 
 
     def do_list(self, arg):
         """List all locally saved recipes and ingredients""" 

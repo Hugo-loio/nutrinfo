@@ -7,7 +7,7 @@ def check_dir(path):
     if(not os.path.isdir(path)):
         os.mkdir(path)
 
-data_dir = sys.path[0] + "/nutrinfo/"
+data_dir = os.getcwd() + "/nutrinfo/"
 check_dir(data_dir)
 data_ing_dir = data_dir + "/ingredients/"
 check_dir(data_ing_dir)
@@ -24,3 +24,20 @@ def print_table(nutrition):
     pretty_dict[" -Fiber"] = str(nutrition["fiber"]) + " (g)"
     pretty_dict["Protein"] = str(nutrition["protein"]) + " (g)"
     print(tabulate(nutrition.items(), headers=[], tablefmt="grid"))
+
+import re
+import sys
+
+def is_valid_filename(filename: str) -> bool:
+    # Common invalid characters on Windows and Unix
+    invalid_chars = r'<>:"/\\|?*\0.'
+    if any(char in filename for char in invalid_chars):
+        print("Error: name has an invalid character " + char)
+        return False
+
+    # No empty or just whitespace
+    if filename.strip() == '':
+        print("Error: name is empty")
+        return False
+
+    return True

@@ -1,7 +1,7 @@
 import numpy as np
 
-from ingredient import Ingredient
-from utils import print_table 
+from .ingredient import Ingredient
+from .utils import print_table 
 
 class Recipe:
     def __init__(self, name : str):
