@@ -49,7 +49,7 @@ class Ingredient:
             json.dump(self.nutrition, f)
 
     def show(self):
-        print("\nNutrition table:")
+        print("\nNutrition table (per 100g):")
         utils.print_table(self.nutrition)
 
     def load(self, verbose = True):

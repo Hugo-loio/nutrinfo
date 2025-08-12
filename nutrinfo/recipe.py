@@ -41,11 +41,15 @@ class Recipe:
         return table
 
     def show(self):
+        if(len(self.ing_names) == 0):
+            print("\nThis recipe is empty.")
+            return
+
         print("\nIngredients:")
         for i,name in enumerate(self.ing_names):
             print(str(i) + ". " + str(self.weights[i]) + " g of " + name.replace("_", " "))
 
-        print("\nNutrition table:")
+        print("\nNutrition table (per 100g):")
         tab = self.table()
         utils.print_table(tab)
 
@@ -59,4 +63,3 @@ class Recipe:
         for name in self.ing_names:
             self.ingredients.append(Ingredient(name, False))
         print("Importing saved recipe...")
-        #self.show()
