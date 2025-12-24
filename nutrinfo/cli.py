@@ -110,7 +110,7 @@ class REPL(cmd.Cmd):
         pass # Do nothing on empty input
 
 def main():
-    REPL().cmdloop("Welcome to nutrinfo! Type 'help' for documentation. Exit with Ctrl-D")
+    REPL().cmdloop("Welcome to nutrinfo! Type 'help' for documentation. Exit with Ctrl-D.")
 
 if __name__ == '__main__':
     main()
